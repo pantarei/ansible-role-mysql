@@ -1,0 +1,15 @@
+---
+# tasks file for mysql
+
+- name: apt-get install
+  apt: name="{{ item }}" state=latest
+  with_items:
+    - mysql-server
+    - python-mysqldb
+  notify: restart mysql
+  tags: mysql
+
+- name: enable service
+  service: name=mysql enabled=yes
+  notify: restart mysql
+  tags: mysql
