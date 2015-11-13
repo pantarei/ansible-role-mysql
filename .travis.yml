@@ -8,7 +8,7 @@ before_install:
   - pip install ansible
 
 install:
-  - ansible-galaxy install -r tests/roles.yml
+  - ansible-galaxy install -r .roles.yml
 
 script:
   - ansible-playbook tests/test.yml -i tests/hosts --syntax-check
