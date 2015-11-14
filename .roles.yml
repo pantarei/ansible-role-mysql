@@ -1,8 +1,6 @@
 ---
 # roles file for mysql
 
-- src: https://github.com/pantarei/ansible-role-apt
-  name: apt
+- src: hswong3i.apt
 
-- src: https://github.com/pantarei/ansible-role-mysql
-  name: mysql
+- src: hswong3i.mysql

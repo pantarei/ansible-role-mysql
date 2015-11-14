@@ -12,4 +12,4 @@ galaxy_info:
   categories:
   - system
 dependencies:
-  - apt
+  - hswong3i.apt
