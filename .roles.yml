@@ -1,6 +1,4 @@
 ---
 # roles file for mysql
 
-- src: hswong3i.apt
-
 - src: hswong3i.mysql
