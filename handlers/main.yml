@@ -1,5 +1,5 @@
 ---
-# handlers file for mysql
+# handlers file for hswong3i.mysql
 
 - name: restart mysql
   service: name=mysql state=restarted

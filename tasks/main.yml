@@ -1,5 +1,5 @@
 ---
-# tasks file for mysql
+# tasks file for hswong3i.mysql
 
 - name: apt-get install
   apt: name="{{ item }}" state=latest
