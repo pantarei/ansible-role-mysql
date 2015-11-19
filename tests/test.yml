@@ -1,5 +1,5 @@
 ---
-# test file for mysql
+# test file for hswong3i.mysql
 
 - hosts: localhost
   remote_user: root
