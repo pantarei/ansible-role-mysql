@@ -7,9 +7,9 @@
     - mysql-server
     - python-mysqldb
   notify: restart mysql
-  tags: mysql
+  tags: hswong3i.mysql
 
 - name: enable service
   service: name=mysql enabled=yes
   notify: restart mysql
-  tags: mysql
+  tags: hswong3i.mysql
