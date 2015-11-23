@@ -2,9 +2,9 @@ Ansible Role for MySQL
 ======================
 
 [![Build Status](https://travis-ci.org/pantarei/ansible-role-mysql.svg?branch=master)](https://travis-ci.org/pantarei/ansible-role-mysql)
-[![GitHub tag](https://img.shields.io/github/tag/pantarei/ansible-role-mysql.svg)](https://github.com/pantarei/ansible-role-mysql)
-[![GitHub license](https://img.shields.io/github/license/pantarei/ansible-role-mysql.svg)](https://github.com/pantarei/ansible-role-mysql/blob/master/LICENSE)
-[![Ansible Role](https://img.shields.io/ansible/role/5975.svg)](https://galaxy.ansible.com/detail#/role/5975)
+ [![GitHub tag](https://img.shields.io/github/tag/pantarei/ansible-role-mysql.svg)](https://github.com/pantarei/ansible-role-mysql)
+ [![GitHub license](https://img.shields.io/github/license/pantarei/ansible-role-mysql.svg)](https://github.com/pantarei/ansible-role-mysql/blob/master/LICENSE)
+ [![Ansible Role](https://img.shields.io/ansible/role/5975.svg)](https://galaxy.ansible.com/detail#/role/5975)
 
 Ansible Role for MySQL Installation.
 
@@ -30,7 +30,6 @@ Example Playbook
 
     - hosts: servers
       roles:
-        - { role: hswong3i.apt, apt_cache_valid_time: 0, apt_upgrade: dist }
         - { role: hswong3i.mysql }
 
 License
