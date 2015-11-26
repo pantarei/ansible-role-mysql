@@ -2,14 +2,38 @@
 # tasks file for hswong3i.mysql
 
 - name: apt-get install
-  apt: name="{{ item }}" state=latest
+  apt:
+    name="{{ item }}"
+    state=latest
   with_items:
     - mysql-server
     - python-mysqldb
   notify: restart mysql
   tags: hswong3i.mysql
 
+- name: copy templates
+  template:
+    src={{ item.src }}
+    dest={{ item.dest }}
+    owner={{ item.owner }}
+    group={{ item.group }}
+    mode={{ item.mode }}
+  with_items:
+    - { src: 'etc/mysql/my.cnf.j2', dest: '/etc/mysql/my.cnf',  owner: 'root', group: 'root', mode: '0644' }
+  notify: restart mysql
+  tags: hswong3i.mysql
+
 - name: enable service
   service: name=mysql enabled=yes
+  notify: restart mysql
+  tags: hswong3i.mysql
+
+- name: enable incomming connection
+  ufw:
+    to_port={{ item }}
+    proto=tcp
+    rule=allow
+  with_items:
+    - "{{ mysql_port }}"
   notify: restart mysql
   tags: hswong3i.mysql
