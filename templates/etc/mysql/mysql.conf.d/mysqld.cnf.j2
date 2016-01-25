@@ -50,7 +50,7 @@ bind-address = {{ mysql_bind_address }}
 #
 # * Fine Tuning
 #
-key_buffer = {{ mysql_key_buffer }}
+key_buffer_size = {{ mysql_key_buffer_size }}
 max_allowed_packet = {{ mysql_max_allowed_packet }}
 thread_stack = {{ mysql_thread_stack }}
 thread_cache_size = {{ mysql_thread_cache_size }}
@@ -114,22 +114,3 @@ innodb_locks_unsafe_for_binlog = {{ mysql_innodb_locks_unsafe_for_binlog }}
 # ssl-ca = /etc/mysql/cacert.pem
 # ssl-cert = /etc/mysql/server-cert.pem
 # ssl-key = /etc/mysql/server-key.pem
-
-
-
-[mysqldump]
-quick
-quote-names
-max_allowed_packet = {{ mysql_max_allowed_packet }}
-
-[mysql]
-#no-auto-rehash	# faster start of mysql but no tab completition
-
-[isamchk]
-key_buffer = {{ mysql_key_buffer }}
-
-#
-# * IMPORTANT: Additional settings that can override those from this file!
-#   The files must end with '.cnf', otherwise they'll be ignored.
-#
-!includedir /etc/mysql/conf.d/
