@@ -6,7 +6,7 @@
     repo={{ item.repo }}
     state={{ item.state }}
   with_items:
-    - { repo: 'ppa:ondrej/mysql-5.6', state: 'present' }
+    - { state: 'present', repo: 'ppa:ondrej/mysql-5.6' }
   notify: restart mysql
   tags: hswong3i.mysql
 
@@ -15,18 +15,18 @@
     name={{ item.name }}
     state={{ item.state }}
   with_items:
-    - { name: 'automysqlbackup', state: 'latest' }
-    - { name: 'libdbd-mysql-perl', state: 'latest' }
-    - { name: 'mysql-client-5.5', state: 'absent' }
-    - { name: 'mysql-client-5.6', state: 'latest' }
-    - { name: 'mysql-client-core-5.5', state: 'absent' }
-    - { name: 'mysql-client-core-5.6', state: 'latest' }
-    - { name: 'mysql-server-5.5', state: 'absent' }
-    - { name: 'mysql-server-5.6', state: 'latest' }
-    - { name: 'mysql-server-core-5.5', state: 'absent' }
-    - { name: 'mysql-server-core-5.6', state: 'latest' }
-    - { name: 'python-mysqldb', state: 'latest' }
-    - { name: 'ufw', state: 'latest' }
+    - { state: 'absent', name: 'mysql-client-5.5' }
+    - { state: 'absent', name: 'mysql-client-core-5.5' }
+    - { state: 'absent', name: 'mysql-server-5.5' }
+    - { state: 'absent', name: 'mysql-server-core-5.5' }
+    - { state: 'latest', name: 'automysqlbackup' }
+    - { state: 'latest', name: 'libdbd-mysql-perl' }
+    - { state: 'latest', name: 'mysql-client-5.6' }
+    - { state: 'latest', name: 'mysql-client-core-5.6' }
+    - { state: 'latest', name: 'mysql-server-5.6' }
+    - { state: 'latest', name: 'mysql-server-core-5.6' }
+    - { state: 'latest', name: 'python-mysqldb' }
+    - { state: 'latest', name: 'ufw' }
   notify: restart mysql
   tags: hswong3i.mysql
 
