@@ -1,15 +1,6 @@
 ---
 # tasks file for hswong3i.mysql
 
-- name: apt-add-repository
-  apt_repository:
-    repo="{{ item.repo }}"
-    state="{{ item.state }}"
-  with_items:
-    - { repo: 'ppa:ondrej/mysql-5.6', state: 'present' }
-  notify: restart mysql
-  tags: hswong3i.mysql
-
 - name: apt-get install
   apt:
     name="{{ item.name }}"
@@ -38,11 +29,7 @@
     group={{ item.group }}
     mode={{ item.mode }}
   with_items:
-    - { src: 'etc/init.d/mysql.j2', dest: '/etc/init.d/mysql',  owner: 'root', group: 'root', mode: '0755' }
-    - { src: 'etc/mysql/conf.d/mysql.cnf.j2', dest: '/etc/mysql/conf.d/mysql.cnf',  owner: 'root', group: 'root', mode: '0644' }
-    - { src: 'etc/mysql/conf.d/mysqldump.cnf.j2', dest: '/etc/mysql/conf.d/mysqldump.cnf',  owner: 'root', group: 'root', mode: '0644' }
-    - { src: 'etc/mysql/mysql.conf.d/mysqld.cnf.j2', dest: '/etc/mysql/mysql.conf.d/mysqld.cnf',  owner: 'root', group: 'root', mode: '0644' }
-    - { src: 'etc/mysql/mysql.conf.d/mysqld_safe_syslog.cnf.j2', dest: '/etc/mysql/mysql.conf.d/mysqld_safe_syslog.cnf',  owner: 'root', group: 'root', mode: '0644' }
+    - { src: 'etc/mysql/my.cnf.j2', dest: '/etc/mysql/my.cnf',  owner: 'root', group: 'root', mode: '0644' }
   notify: restart mysql
   tags: hswong3i.mysql
 
