@@ -111,7 +111,7 @@ Role Variables
 <td align="left">This variable affects how InnoDB uses gap locking for searches and index scans.</td>
 </tr>
 <tr class="odd">
-<td align="left">mysql_key_buffer</td>
+<td align="left">mysql_key_buffer_size</td>
 <td align="left">yes</td>
 <td align="left">256M</td>
 <td align="left"></td>
