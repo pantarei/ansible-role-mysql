@@ -3,40 +3,42 @@
 
 - name: apt-get install
   apt:
-    name={{ item.name }}
-    state={{ item.state }}
+    name: "{{ item.name }}"
+    state: "{{ item.state }}"
   with_items:
-    - { state: 'latest', name: 'automysqlbackup' }
-    - { state: 'latest', name: 'libdbd-mysql-perl' }
-    - { state: 'latest', name: 'mysql-server' }
-    - { state: 'latest', name: 'python-mysqldb' }
-    - { state: 'latest', name: 'ufw' }
+    - { state: "latest", name: "automysqlbackup" }
+    - { state: "latest", name: "libdbd-mysql-perl" }
+    - { state: "latest", name: "mysql-server" }
+    - { state: "latest", name: "python-mysqldb" }
+    - { state: "latest", name: "ufw" }
   notify: restart mysql
   tags: hswong3i.mysql
 
 - name: copy templates
   template:
-    src={{ item.src }}
-    dest={{ item.dest }}
-    owner={{ item.owner }}
-    group={{ item.group }}
-    mode={{ item.mode }}
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
+    mode: "{{ item.mode }}"
   with_items:
-    - { src: 'etc/mysql/my.cnf.j2', dest: '/etc/mysql/my.cnf',  owner: 'root', group: 'root', mode: '0644' }
+    - { src: "etc/mysql/my.cnf.j2", dest: "/etc/mysql/my.cnf",  owner: "root", group: "root", mode: "0644" }
   notify: restart mysql
   tags: hswong3i.mysql
 
 - name: enable service
-  service: name=mysql enabled=yes
+  service:
+    name: "mysql"
+    enabled: "yes"
   notify: restart mysql
   tags: hswong3i.mysql
 
 - name: enable incomming connection
   ufw:
-    to_port={{ item.to_port }}
-    proto={{ item.proto }}
-    rule={{ item.rule }}
+    to_port: "{{ item.to_port }}"
+    proto: "{{ item.proto }}"
+    rule: "{{ item.rule }}"
   with_items:
-    - { to_port: "{{ mysql_port }}", proto: 'tcp', rule: 'allow' }
+    - { to_port: "{{ mysql_port }}", proto: "tcp", rule: "allow" }
   notify: restart mysql
   tags: hswong3i.mysql
