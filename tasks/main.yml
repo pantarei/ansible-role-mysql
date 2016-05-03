@@ -10,7 +10,6 @@
     - { state: "latest", name: "libdbd-mysql-perl" }
     - { state: "latest", name: "mysql-server" }
     - { state: "latest", name: "python-mysqldb" }
-    - { state: "latest", name: "ufw" }
   notify: restart mysql
   tags: hswong3i.mysql
 
@@ -30,15 +29,5 @@
   service:
     name: "mysql"
     enabled: "yes"
-  notify: restart mysql
-  tags: hswong3i.mysql
-
-- name: enable incomming connection
-  ufw:
-    to_port: "{{ item.to_port }}"
-    proto: "{{ item.proto }}"
-    rule: "{{ item.rule }}"
-  with_items:
-    - { to_port: "{{ mysql_port }}", proto: "tcp", rule: "allow" }
   notify: restart mysql
   tags: hswong3i.mysql
