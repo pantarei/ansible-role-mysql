@@ -259,9 +259,9 @@ No additional role dependencies.
 Example Playbook
 ----------------
 
-    - hosts: servers
+    - hosts: all
       roles:
-        - { role: hswong3i.mysql }
+        - role: hswong3i.mysql
 
 License
 -------
