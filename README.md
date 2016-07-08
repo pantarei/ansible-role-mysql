@@ -89,18 +89,32 @@ Role Variables
 <td>If this variable is enabled (the default), InnoDB stores all data twice, first to the doublewrite buffer, then to the actual data files.</td>
 </tr>
 <tr class="even">
+<td>mysql_innodb_file_format</td>
+<td>yes</td>
+<td>barracuda</td>
+<td></td>
+<td>The file format to use for new InnoDB tables. Currently, Antelope and Barracuda are supported.</td>
+</tr>
+<tr class="odd">
 <td>mysql_innodb_file_per_table</td>
 <td>yes</td>
 <td>1</td>
 <td></td>
 <td>When innodb_file_per_table is enabled (the default in 5.6.6 and higher), InnoDB stores the data and indexes for each newly created table in a separate .ibd file, rather than in the system tablespace.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>mysql_innodb_flush_log_at_trx_commit</td>
 <td>yes</td>
 <td>2</td>
 <td></td>
 <td>Controls the balance between strict ACID compliance for commit operations, and higher performance that is possible when commit-related I/O operations are rearranged and done in batches.</td>
+</tr>
+<tr class="odd">
+<td>mysql_innodb_large_prefix</td>
+<td>yes</td>
+<td>1</td>
+<td></td>
+<td>When this option is enabled, index key prefixes longer than 767 bytes (up to 3072 bytes) are allowed for InnoDB tables that use the DYNAMIC and COMPRESSED row formats.</td>
 </tr>
 <tr class="even">
 <td>mysql_innodb_locks_unsafe_for_binlog</td>
