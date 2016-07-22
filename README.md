@@ -221,7 +221,7 @@ Role Variables
 <td>On Unix platforms, this variable is the name of the socket file that is used for local client connections.</td>
 </tr>
 <tr class="even">
-<td>mysql_table_cache</td>
+<td>mysql_table_open_cache</td>
 <td>yes</td>
 <td>512</td>
 <td></td>
@@ -235,27 +235,20 @@ Role Variables
 <td>How many threads the server should cache for reuse.</td>
 </tr>
 <tr class="even">
-<td>mysql_thread_concurrency</td>
-<td>yes</td>
-<td>16</td>
-<td></td>
-<td>This variable is specific to Solaris 8 and earlier systems, for which mysqld invokes the thr_setconcurrency() function with the variable value.</td>
-</tr>
-<tr class="odd">
 <td>mysql_thread_stack</td>
 <td>yes</td>
 <td>256K</td>
 <td></td>
 <td>The stack size for each thread.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>mysql_tmpdir</td>
 <td>yes</td>
 <td>/tmp</td>
 <td></td>
 <td>The path of the directory to use for creating temporary files.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>mysql_user</td>
 <td>yes</td>
 <td>mysql</td>

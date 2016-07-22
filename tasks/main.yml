@@ -16,7 +16,7 @@
   with_items:
     - { state: "latest", name: "automysqlbackup" }
     - { state: "latest", name: "libdbd-mysql-perl" }
-    - { state: "latest", name: "mysql-server" }
+    - { state: "latest", name: "mysql-server-5.7" }
     - { state: "latest", name: "python-mysqldb" }
   notify: restart mysql
   tags: hswong3i.mysql
