@@ -166,7 +166,7 @@ Role Variables
 <td>The maximum permitted number of simultaneous client connections.</td>
 </tr>
 <tr class="odd">
-<td>mysql_myisam_recover</td>
+<td>mysql_myisam_recover_options</td>
 <td>yes</td>
 <td>BACKUP</td>
 <td><ul>
@@ -221,7 +221,7 @@ Role Variables
 <td>On Unix platforms, this variable is the name of the socket file that is used for local client connections.</td>
 </tr>
 <tr class="even">
-<td>mysql_table_open_cache</td>
+<td>mysql_table_cache</td>
 <td>yes</td>
 <td>512</td>
 <td></td>
