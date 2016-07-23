@@ -1,6 +1,9 @@
 ---
 # defaults file for hswong3i.mysql
 
+mysql_root_pass: ~
+mysql_root_user: "root"
+
 mysql_basedir: "/usr"
 mysql_bind_address: "0.0.0.0"
 mysql_datadir: "/var/lib/mysql"
@@ -25,7 +28,6 @@ mysql_pid_file: "/var/run/mysqld/mysqld.pid"
 mysql_port: "3306"
 mysql_query_cache_limit: "8M"
 mysql_query_cache_size: "32M"
-mysql_root_password: ""
 mysql_socket: "/var/run/mysqld/mysqld.sock"
 mysql_table_open_cache: "512"
 mysql_thread_cache_size: "8"
