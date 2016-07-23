@@ -1,15 +1,60 @@
 ---
 # tasks file for hswong3i.mysql
 
+- name: apt-add-repository
+  apt_repository:
+    repo: "{{ item.repo }}"
+    state: "{{ item.state }}"
+  with_items:
+    - { state: "present", repo: "ppa:ondrej/mysql-5.7" }
+  tags: hswong3i.mysql
+
 - name: apt-get install
   apt:
     name: "{{ item.name }}"
     state: "{{ item.state }}"
   with_items:
+    - { state: "absent", name: "mysql-client" }
+    - { state: "absent", name: "mysql-client-5.5" }
+    - { state: "absent", name: "mysql-client-5.6" }
+    - { state: "absent", name: "mysql-client-core-5.5" }
+    - { state: "absent", name: "mysql-client-core-5.6" }
+    - { state: "absent", name: "mysql-server" }
+    - { state: "absent", name: "mysql-server-5.5" }
+    - { state: "absent", name: "mysql-server-5.6" }
+    - { state: "absent", name: "mysql-server-core-5.5" }
+    - { state: "absent", name: "mysql-server-core-5.6" }
     - { state: "latest", name: "automysqlbackup" }
     - { state: "latest", name: "libdbd-mysql-perl" }
-    - { state: "latest", name: "mysql-server" }
+    - { state: "latest", name: "mysql-client-5.7" }
+    - { state: "latest", name: "mysql-client-core-5.7" }
+    - { state: "latest", name: "mysql-server-5.7" }
+    - { state: "latest", name: "mysql-server-core-5.7" }
     - { state: "latest", name: "python-mysqldb" }
+  notify: restart mysql
+  tags: hswong3i.mysql
+
+- name: disable mysql anonymous access
+  shell: |
+    sudo -i mysql -NBe "DELETE FROM mysql.user WHERE User = ''"
+  register: disable_anonymous_access_result
+  changed_when: disable_anonymous_access_result.rc != 0
+  notify: restart mysql
+  tags: hswong3i.mysql
+
+- name: disable mysql root access from remote
+  shell: |
+    sudo -i mysql -NBe "DELETE FROM mysql.user WHERE User = 'root' AND Host <> 'localhost'"
+  register: disable_root_access_remote_result
+  changed_when: disable_root_access_remote_result.rc != 0
+  notify: restart mysql
+  tags: hswong3i.mysql
+
+- name: setup mysql root password
+  shell: |
+    sudo -i mysql -NBe 'ALTER USER "root"@"localhost" IDENTIFIED WITH mysql_native_password BY "{{ mysql_root_password }}"'
+  register: setup_root_password_result
+  changed_when: setup_root_password_result.rc != 0
   notify: restart mysql
   tags: hswong3i.mysql
 
@@ -21,7 +66,11 @@
     group: "{{ item.group }}"
     mode: "{{ item.mode }}"
   with_items:
-    - { src: "etc/mysql/my.cnf.j2", dest: "/etc/mysql/my.cnf",  owner: "root", group: "root", mode: "0644" }
+    - { src: "etc/mysql/conf.d/mysql.cnf.j2", dest: "/etc/mysql/conf.d/mysql.cnf",  owner: "root", group: "root", mode: "0644" }
+    - { src: "etc/mysql/conf.d/mysqldump.cnf.j2", dest: "/etc/mysql/conf.d/mysqldump.cnf",  owner: "root", group: "root", mode: "0644" }
+    - { src: "etc/mysql/mysql.conf.d/mysqld.cnf.j2", dest: "/etc/mysql/mysql.conf.d/mysqld.cnf",  owner: "root", group: "root", mode: "0644" }
+    - { src: "etc/mysql/mysql.conf.d/mysqld_safe_syslog.cnf.j2", dest: "/etc/mysql/mysql.conf.d/mysqld_safe_syslog.cnf",  owner: "root", group: "root", mode: "0644" }
+    - { src: "root/.my.cnf.j2", dest: "/root/.my.cnf",  owner: "root", group: "root", mode: "0600" }
   notify: restart mysql
   tags: hswong3i.mysql
 

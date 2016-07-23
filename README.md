@@ -166,7 +166,7 @@ Role Variables
 <td>The maximum permitted number of simultaneous client connections.</td>
 </tr>
 <tr class="odd">
-<td>mysql_myisam_recover</td>
+<td>mysql_myisam_recover_options</td>
 <td>yes</td>
 <td>BACKUP</td>
 <td><ul>
@@ -214,32 +214,32 @@ Role Variables
 <td>The amount of memory allocated for caching query results.</td>
 </tr>
 <tr class="odd">
+<td>mysql_root_password</td>
+<td>yes</td>
+<td></td>
+<td></td>
+<td>Default mysql root user password.</td>
+</tr>
+<tr class="even">
 <td>mysql_socket</td>
 <td>yes</td>
 <td>/var/run/mysqld/mysqld.sock</td>
 <td></td>
 <td>On Unix platforms, this variable is the name of the socket file that is used for local client connections.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>mysql_table_open_cache</td>
 <td>yes</td>
 <td>512</td>
 <td></td>
 <td>The number of open tables for all threads.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>mysql_thread_cache_size</td>
 <td>yes</td>
 <td>8</td>
 <td></td>
 <td>How many threads the server should cache for reuse.</td>
-</tr>
-<tr class="even">
-<td>mysql_thread_concurrency</td>
-<td>yes</td>
-<td>16</td>
-<td></td>
-<td>This variable is specific to Solaris 8 and earlier systems, for which mysqld invokes the thr_setconcurrency() function with the variable value.</td>
 </tr>
 <tr class="odd">
 <td>mysql_thread_stack</td>
