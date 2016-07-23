@@ -23,7 +23,7 @@
 
 - name: disable mysql anonymous access
   shell: |
-    mysql -NBe "DELETE FROM mysql.user WHERE User = ''"
+    sudo -i mysql -NBe "DELETE FROM mysql.user WHERE User = ''"
   register: disable_anonymous_access_result
   changed_when: disable_anonymous_access_result.rc != 0
   notify: restart mysql
@@ -31,7 +31,7 @@
 
 - name: disable mysql root access from remote
   shell: |
-    mysql -NBe "DELETE FROM mysql.user WHERE User = 'root' AND Host <> 'localhost'"
+    sudo -i mysql -NBe "DELETE FROM mysql.user WHERE User = 'root' AND Host <> 'localhost'"
   register: disable_root_access_remote_result
   changed_when: disable_root_access_remote_result.rc != 0
   notify: restart mysql
@@ -39,7 +39,7 @@
 
 - name: setup mysql root password
   shell: |
-    mysql -NBe 'ALTER USER "root"@"localhost" IDENTIFIED WITH mysql_native_password BY "{{ mysql_root_password }}"'
+    sudo -i mysql -NBe 'ALTER USER "root"@"localhost" IDENTIFIED WITH mysql_native_password BY "{{ mysql_root_password }}"'
   register: setup_root_password_result
   changed_when: setup_root_password_result.rc != 0
   notify: restart mysql
