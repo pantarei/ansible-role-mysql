@@ -3,5 +3,5 @@
 [client]
 host = localhost
 user = root
-password = {{ mysql_root_password }}
+password = {{ mysql_root_pass | default(None) or '' }}
 socket = /var/run/mysqld/mysqld.sock

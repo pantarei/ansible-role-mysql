@@ -36,6 +36,20 @@ Role Variables
 </thead>
 <tbody>
 <tr class="odd">
+<td>mysql_root_pass</td>
+<td>yes</td>
+<td></td>
+<td></td>
+<td>Default mysql root user password.</td>
+</tr>
+<tr class="even">
+<td>mysql_root_user</td>
+<td>yes</td>
+<td>root</td>
+<td></td>
+<td>Default mysql root user name.</td>
+</tr>
+<tr class="odd">
 <td>mysql_basedir</td>
 <td>yes</td>
 <td>/usr</td>
@@ -214,48 +228,41 @@ Role Variables
 <td>The amount of memory allocated for caching query results.</td>
 </tr>
 <tr class="odd">
-<td>mysql_root_password</td>
-<td>yes</td>
-<td></td>
-<td></td>
-<td>Default mysql root user password.</td>
-</tr>
-<tr class="even">
 <td>mysql_socket</td>
 <td>yes</td>
 <td>/var/run/mysqld/mysqld.sock</td>
 <td></td>
 <td>On Unix platforms, this variable is the name of the socket file that is used for local client connections.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>mysql_table_open_cache</td>
 <td>yes</td>
 <td>512</td>
 <td></td>
 <td>The number of open tables for all threads.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>mysql_thread_cache_size</td>
 <td>yes</td>
 <td>8</td>
 <td></td>
 <td>How many threads the server should cache for reuse.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>mysql_thread_stack</td>
 <td>yes</td>
 <td>256K</td>
 <td></td>
 <td>The stack size for each thread.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>mysql_tmpdir</td>
 <td>yes</td>
 <td>/tmp</td>
 <td></td>
 <td>The path of the directory to use for creating temporary files.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>mysql_user</td>
 <td>yes</td>
 <td>mysql</td>
