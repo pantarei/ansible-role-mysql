@@ -1,3 +1,4 @@
 ---
 
-mysql_root_password: "Aini2ouK"
+mysql_root_pass: "Aini2ouK"
+mysql_root_user: "root"
