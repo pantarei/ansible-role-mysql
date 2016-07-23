@@ -18,4 +18,5 @@ before_install:
 script:
   - sudo ansible-playbook tests/test.yml -i tests/hosts --syntax-check
   - sudo ansible-playbook tests/test.yml -i tests/hosts
+  - sudo ansible-playbook tests/test.yml -i tests/hosts
   - sudo ansible-playbook tests/test.yml -i tests/hosts | grep -q 'unreachable=0.*failed=0' && (echo 'pass' && exit 0) || (echo 'fail' && exit 1)
