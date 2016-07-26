@@ -2,9 +2,7 @@
 # tasks file for hswong3i.mysql
 
 - name: include release specific variables
-  include_vars: "{{ item }}"
-  with_first_found:
-    - "{{ ansible_distribution_release }}.yml"
+  include_vars: "{{ ansible_distribution_release }}.yml"
   tags: hswong3i.mysql
 
 - name: apt-add-repository
