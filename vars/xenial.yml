@@ -1,8 +1,8 @@
 ---
 # vars file for hswong3i.mysql (xenial)
 
-_apt_repository_repo: []
-_apt_name: [
+_apt_repository: []
+_apt: [
   { state: "absent", name: "mysql-client" },
   { state: "absent", name: "mysql-server" },
   { state: "latest", name: "automysqlbackup" },

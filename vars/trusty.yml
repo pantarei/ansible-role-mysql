@@ -1,10 +1,10 @@
 ---
 # vars file for hswong3i.mysql (trusty)
 
-_apt_repository_repo: [
+_apt_repository: [
   { state: "present", repo: "ppa:ondrej/mysql-5.7" },
 ]
-_apt_name: [
+_apt: [
   { state: "absent", name: "mysql-client" },
   { state: "absent", name: "mysql-client-5.5" },
   { state: "absent", name: "mysql-client-5.6" },
