@@ -1,0 +1,15 @@
+---
+# vars file for hswong3i.mysql (xenial)
+
+_apt_repository: []
+_apt: [
+  { state: "absent", name: "mysql-client" },
+  { state: "absent", name: "mysql-server" },
+  { state: "latest", name: "automysqlbackup" },
+  { state: "latest", name: "libdbd-mysql-perl" },
+  { state: "latest", name: "mysql-client-5.7" },
+  { state: "latest", name: "mysql-client-core-5.7" },
+  { state: "latest", name: "mysql-server-5.7" },
+  { state: "latest", name: "mysql-server-core-5.7" },
+  { state: "latest", name: "python-mysqldb" },
+]
