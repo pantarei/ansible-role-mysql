@@ -1,0 +1,25 @@
+---
+# vars file for hswong3i.mysql (trusty)
+
+_apt_repository_repo: [
+  { state: "present", repo: "ppa:ondrej/mysql-5.7" },
+]
+_apt_name: [
+  { state: "absent", name: "mysql-client" },
+  { state: "absent", name: "mysql-client-5.5" },
+  { state: "absent", name: "mysql-client-5.6" },
+  { state: "absent", name: "mysql-client-core-5.5" },
+  { state: "absent", name: "mysql-client-core-5.6" },
+  { state: "absent", name: "mysql-server" },
+  { state: "absent", name: "mysql-server-5.5" },
+  { state: "absent", name: "mysql-server-5.6" },
+  { state: "absent", name: "mysql-server-core-5.5" },
+  { state: "absent", name: "mysql-server-core-5.6" },
+  { state: "latest", name: "automysqlbackup" },
+  { state: "latest", name: "libdbd-mysql-perl" },
+  { state: "latest", name: "mysql-client-5.7" },
+  { state: "latest", name: "mysql-client-core-5.7" },
+  { state: "latest", name: "mysql-server-5.7" },
+  { state: "latest", name: "mysql-server-core-5.7" },
+  { state: "latest", name: "python-mysqldb" },
+]
