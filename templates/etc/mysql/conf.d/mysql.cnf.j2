@@ -1,3 +1,10 @@
-# {{ansible_managed }}
+# {{ ansible_managed }}
 
-[mysql]
+[client]
+# Default is Latin1, if you need UTF-8 set this (also in server section)
+default-character-set = {{ mysql_default_character_set }}
+
+[mysqld]
+# Default is Latin1, if you need UTF-8 set all this (also in client section)
+character-set-server = {{ mysql_character_set_server }}
+collation-server = {{ mysql_collation_server }}  
