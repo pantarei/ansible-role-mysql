@@ -2,7 +2,6 @@
 # defaults file for hswong3i.mysql
 
 mysql_root_pass: ~
-mysql_root_user: "root"
 
 mysql_basedir: "/usr"
 mysql_bind_address: "0.0.0.0"
