@@ -19,6 +19,13 @@
   with_items: "{{ _apt }}"
   tags: hswong3i.mysql
 
+- name: start service
+  service:
+    name: "mysql"
+    state: "started"
+  notify: restart mysql
+  tags: hswong3i.mysql
+
 - name: disable mysql anonymous access
   shell: |
     sudo -i mysql -NBe "DELETE FROM mysql.user WHERE User = ''"
@@ -44,6 +51,18 @@
   ignore_errors: yes
   tags: hswong3i.mysql
 
+- name: copy templates
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
+    mode: "{{ item.mode }}"
+  with_items:
+    - { src: "etc/mysql/debian.cnf.j2", dest: "/etc/mysql/debian.cnf",  owner: "root", group: "root", mode: "0600" }
+  when: setup_debian_sys_maint_password_result.rc == 0
+  tags: hswong3i.mysql
+
 - name: setup mysql root password
   shell: |
     sudo -i mysql -NBe 'ALTER USER "root"@"localhost" IDENTIFIED WITH mysql_native_password BY "{{ mysql_root_pass }}"'
@@ -61,12 +80,22 @@
     group: "{{ item.group }}"
     mode: "{{ item.mode }}"
   with_items:
+    - { src: "root/.my.cnf.j2", dest: "/root/.my.cnf",  owner: "root", group: "root", mode: "0600" }
+  when: setup_root_password_result.rc == 0
+  tags: hswong3i.mysql
+
+- name: copy templates
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
+    mode: "{{ item.mode }}"
+  with_items:
     - { src: "etc/mysql/conf.d/mysql.cnf.j2", dest: "/etc/mysql/conf.d/mysql.cnf",  owner: "root", group: "root", mode: "0644" }
     - { src: "etc/mysql/conf.d/mysqldump.cnf.j2", dest: "/etc/mysql/conf.d/mysqldump.cnf",  owner: "root", group: "root", mode: "0644" }
-    - { src: "etc/mysql/debian.cnf.j2", dest: "/etc/mysql/debian.cnf",  owner: "root", group: "root", mode: "0600" }
     - { src: "etc/mysql/mysql.conf.d/mysqld.cnf.j2", dest: "/etc/mysql/mysql.conf.d/mysqld.cnf",  owner: "root", group: "root", mode: "0644" }
     - { src: "etc/mysql/mysql.conf.d/mysqld_safe_syslog.cnf.j2", dest: "/etc/mysql/mysql.conf.d/mysqld_safe_syslog.cnf",  owner: "root", group: "root", mode: "0644" }
-    - { src: "root/.my.cnf.j2", dest: "/root/.my.cnf",  owner: "root", group: "root", mode: "0600" }
   tags: hswong3i.mysql
 
 - name: enable service
