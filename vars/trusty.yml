@@ -2,9 +2,24 @@
 # vars file for hswong3i.mysql (trusty)
 
 _apt_repository: [
+  { state: "absent", repo: "deb [arch=amd64,i386,ppc64el] http://ftp.osuosl.org/pub/mariadb/repo/10.1/ubuntu trusty main" },
   { state: "present", repo: "ppa:ondrej/mysql-5.7" },
 ]
 _apt: [
+  { state: "absent", name: "mariadb-client" },
+  { state: "absent", name: "mariadb-client-10.0" },
+  { state: "absent", name: "mariadb-client-10.1" },
+  { state: "absent", name: "mariadb-client-5.5" },
+  { state: "absent", name: "mariadb-client-core-10.0" },
+  { state: "absent", name: "mariadb-client-core-10.1" },
+  { state: "absent", name: "mariadb-client-core-5.5" },
+  { state: "absent", name: "mariadb-server" },
+  { state: "absent", name: "mariadb-server-10.0" },
+  { state: "absent", name: "mariadb-server-10.1" },
+  { state: "absent", name: "mariadb-server-5.5" },
+  { state: "absent", name: "mariadb-server-core-10.0" },
+  { state: "absent", name: "mariadb-server-core-10.1" },
+  { state: "absent", name: "mariadb-server-core-5.5" },
   { state: "absent", name: "mysql-client" },
   { state: "absent", name: "mysql-client-5.5" },
   { state: "absent", name: "mysql-client-5.6" },
