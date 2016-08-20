@@ -3,5 +3,7 @@
 
 - name: restart mysql
   service:
-    name: "mysql"
-    state: "restarted"
+    name: "{{ item.name }}"
+    state: "{{ item.state }}"
+  with_items:
+    - { name: "mysql", state: "restarted" }

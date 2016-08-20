@@ -21,8 +21,10 @@
 
 - name: start service
   service:
-    name: "mysql"
-    state: "started"
+    name: "{{ item.name }}"
+    state: "{{ item.state }}"
+  with_items:
+    - { name: "mysql", state: "started" }
   register: start_service_result
   ignore_errors: yes
   tags: hswong3i.mysql
@@ -117,7 +119,9 @@
 
 - name: enable service
   service:
-    name: "mysql"
-    enabled: "yes"
+    name: "{{ item.name }}"
+    enabled: "{{ item.enabled }}"
+  with_items:
+    - { name: "mysql", enabled: "yes" }
   notify: restart mysql
   tags: hswong3i.mysql
