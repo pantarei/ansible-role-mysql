@@ -17,6 +17,7 @@
     name: "{{ item.name }}"
     state: "{{ item.state }}"
   with_items: "{{ _apt }}"
+  notify: restart mysql
   tags: hswong3i.mysql
 
 - name: start service
@@ -33,7 +34,7 @@
   shell: |
     sudo -i mysql -NBe "DELETE FROM mysql.user WHERE User = ''"
   when:
-    - start_service_result.state == "started"
+    - start_service_result.results[0].state == "started"
   register: disable_anonymous_access_result
   changed_when: disable_anonymous_access_result.rc != 0
   ignore_errors: yes
@@ -43,7 +44,7 @@
   shell: |
     sudo -i mysql -NBe "DELETE FROM mysql.user WHERE User = 'root' AND Host <> 'localhost'"
   when:
-    - start_service_result.state == "started"
+    - start_service_result.results[0].state == "started"
   register: disable_root_access_remote_result
   changed_when: disable_root_access_remote_result.rc != 0
   ignore_errors: yes
@@ -53,7 +54,7 @@
   shell: |
     sudo -i mysql -NBe 'ALTER USER "debian-sys-maint"@"localhost" IDENTIFIED WITH mysql_native_password BY "{{ mysql_root_pass }}"'
   when: 
-    - start_service_result.state == "started"
+    - start_service_result.results[0].state == "started"
     - mysql_root_pass is string
   register: setup_debian_sys_maint_password_result
   changed_when: setup_debian_sys_maint_password_result.rc != 0
@@ -70,7 +71,7 @@
   with_items:
     - { src: "etc/mysql/debian.cnf.j2", dest: "/etc/mysql/debian.cnf",  owner: "root", group: "root", mode: "0600" }
   when: 
-    - start_service_result.state == "started"
+    - start_service_result.results[0].state == "started"
     - mysql_root_pass is string
     - setup_debian_sys_maint_password_result.rc == 0
   ignore_errors: yes
@@ -80,7 +81,7 @@
   shell: |
     sudo -i mysql -NBe 'ALTER USER "root"@"localhost" IDENTIFIED WITH mysql_native_password BY "{{ mysql_root_pass }}"'
   when:
-    - start_service_result.state == "started"
+    - start_service_result.results[0].state == "started"
     - mysql_root_pass is string
   register: setup_root_password_result
   changed_when: setup_root_password_result.rc != 0
@@ -97,7 +98,7 @@
   with_items:
     - { src: "root/.my.cnf.j2", dest: "/root/.my.cnf",  owner: "root", group: "root", mode: "0600" }
   when: 
-    - start_service_result.state == "started"
+    - start_service_result.results[0].state == "started"
     - mysql_root_pass is string
     - setup_root_password_result.rc == 0
   ignore_errors: yes
@@ -115,6 +116,7 @@
     - { src: "etc/mysql/conf.d/mysqldump.cnf.j2", dest: "/etc/mysql/conf.d/mysqldump.cnf",  owner: "root", group: "root", mode: "0644" }
     - { src: "etc/mysql/mysql.conf.d/mysqld.cnf.j2", dest: "/etc/mysql/mysql.conf.d/mysqld.cnf",  owner: "root", group: "root", mode: "0644" }
     - { src: "etc/mysql/mysql.conf.d/mysqld_safe_syslog.cnf.j2", dest: "/etc/mysql/mysql.conf.d/mysqld_safe_syslog.cnf",  owner: "root", group: "root", mode: "0644" }
+  notify: restart mysql
   tags: hswong3i.mysql
 
 - name: enable service
