@@ -36,5 +36,6 @@ _apt: [
   { state: "latest", name: "mysql-client-core-5.7" },
   { state: "latest", name: "mysql-server-5.7" },
   { state: "latest", name: "mysql-server-core-5.7" },
+  { state: "latest", name: "mytop" },
   { state: "latest", name: "python-mysqldb" },
 ]
